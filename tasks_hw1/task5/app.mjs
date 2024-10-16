@@ -24,19 +24,11 @@ const server = createServer((req, res) => {
       res.writeHead(200, { "Content-Type": "text/plain" });
       res.end(JSON.stringify(data));
     } else {
-      if (!Object.keys(data).includes(pathname)) {
-        data[pathname] = 1;
-        fs.writeFileSync(historyPath, JSON.stringify(data), "utf8");
+      data[pathname] = (parseInt(data[pathname]) || 0) + 1;
+      fs.writeFileSync(historyPath, JSON.stringify(data), "utf8");
 
-        res.writeHead(200, { "Content-Type": "text/plain" });
-        res.end("History update");
-      } else {
-        data[pathname] = parseInt(data[pathname]) + 1;
-        fs.writeFileSync(historyPath, JSON.stringify(data), "utf8");
-
-        res.writeHead(200, { "Content-Type": "text/plain" });
-        res.end("History update");
-      }
+      res.writeHead(200, { "Content-Type": "text/plain" });
+      res.end("History update");
     }
   }
 });
