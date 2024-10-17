@@ -21,7 +21,10 @@ const server = createServer((req, res) => {
 
   if (pathname != "./favicon.ico") {
     if (pathname === "./history") {
-      res.writeHead(200, { "Content-Type": "text/plain" });
+      data[pathname] = (parseInt(data[pathname]) || 0) + 1;
+      fs.writeFileSync(historyPath, JSON.stringify(data), "utf8");
+
+      res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(data));
     } else {
       data[pathname] = (parseInt(data[pathname]) || 0) + 1;
