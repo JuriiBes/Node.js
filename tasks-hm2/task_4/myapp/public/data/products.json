@@ -1,0 +1,27 @@
+[
+  {
+    "name": "milk",
+    "price": 100,
+    "remainder": 5
+  },
+  {
+    "name": "bread",
+    "price": 110,
+    "remainder": 6
+  },
+  {
+    "name": "butter",
+    "price": 80,
+    "remainder": 5
+  },
+  {
+    "name": "whisky",
+    "price": 1000,
+    "remainder": 1
+  },
+  {
+    "name": "bear",
+    "price": 70,
+    "remainder": 15
+  }
+]
