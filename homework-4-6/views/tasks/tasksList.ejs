@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Tasks</title>
+    <script src="/javascripts/RequestManager.js"></script>
+  </head>
+  <body>
+    <div class="task">
+      <h2>My Tasks</h2>
+      <a href="/tasks/create" class="task__add-task">Create new task</a>
+      <div class="task__list">
+        <% tasks.forEach(task=> {%>
+        <div class="task__item">
+          <div class="task__task"><%=task.task%></div>
+          <div class="task__options">
+            <div class="task__icon-photo">
+              <img
+                src="<%= task.imgSrc ? `/${task.imgSrc}` :
+              '/images/photo.png'%>"
+                alt="icon photo file"
+                class="task__img-icon"
+              />
+            </div>
+            <div class="task__priority">
+              Priority:
+              <span><%=task.priority%></span>
+            </div>
+            <div class="task__buttons">
+              <a href="/tasks/edit/<%=task.id%>" class="task__edit-button"
+                >edit</a
+              >
+              <button
+                onclick="RequestManager.deleteRequest('/tasks', {id: <%= task.id %>})"
+                class="task__delete-button"
+              >
+                delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <%})%>
+      </div>
+    </div>
+  </body>
+</html>
