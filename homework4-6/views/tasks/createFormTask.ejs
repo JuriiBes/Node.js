@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="/javascripts/RequestManager.js"></script>
+    <script>
+     
+    </script>
+  </head>
+  <body>
+    <%- include('../section/header')  %>
+  <main>
+    <div class="create">
+      <h2 class="create__title"><%= task.id ? "Edit":"Create" %></h2>
+      <form
+        action="<%= task.id ? '/tasks/edit/' + task.id : '/tasks/create'%>"
+        method="post"
+        enctype="multipart/form-data"
+        class="create__form"
+      >
+        <label class="create__label">
+          Task
+          <textarea name="task" class="create__textarea" minlength="10" autofocus required><%= task ? task.task : ''%></textarea>
+        </label>
+       
+        <label class="create__priority"
+          >Priority
+          <select name="priority" class="create__select">
+            <option value="hight" <%= task.priority==='hight' ? 'selected' : ''%> >hight</option>
+            <option value="medium" <%= task.priority==='medium' ? 'selected' : ''%> >medium</option>
+            <option value="low" <%= task.priority==='low' ? 'selected' : ''%>> low</option>
+          </select>
+        </label>
+
+        <!-- Ця частина не діє  -->
+          <% if (errors?.length > 0) {%>
+            <div class="create__errors">
+            <% errors.forEach( function(error){%>
+              <p><%=error.msg%></p>
+            <%})%>
+          </div>
+          <%}%>
+        
+
+        <label class="create__label add-file">
+          <div class="create__icon-body">
+            <img src="<%= task.imgSrc ?  `/${task.imgSrc}` : '/images/photo-add1.png'%>" alt="icon photo file" class="create__img-icon"
+            />
+            <input  type="file" name="taskFile" accept="image/*" class="create__input-img" onchange="RequestManager.checkAddFile(event)">
+           </div>
+        </label>
+       
+        <button class="create__button" type="submit">
+          <%= task.id ? "Edit":"Create" %> task
+        </button>
+        <a href="/tasks" class="create__button-back" type="submit"
+          >to Tasks page</a
+        >
+      </form>
+    </div>
+  </main>
+    <%- include('../section/footer') %>
+  </body>
+</html>
+
+
